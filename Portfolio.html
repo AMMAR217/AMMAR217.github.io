@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ammar Ibrahim | Software Developer & Data Analyst</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --primary: #0ea5e9; 
+            --secondary: #8b5cf6; 
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --glass-bg: rgba(30, 41, 59, 0.7);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.7;
+            background-image: radial-gradient(circle at top left, rgba(14, 165, 233, 0.1), transparent 40%),
+                              radial-gradient(circle at bottom right, rgba(139, 92, 246, 0.1), transparent 40%);
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-main);
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .logo span { color: var(--primary); }
+
+        nav {
+            display: flex;
+            align-items: center;
+        }
+
+        nav a {
+            color: var(--text-main);
+            text-decoration: none;
+            margin-left: 25px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover { color: var(--primary); }
+
+        .social-links {
+            margin-left: 30px;
+            padding-left: 30px;
+            border-left: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .social-links a {
+            color: var(--primary);
+            margin-left: 15px;
+        }
+
+        .social-links a:hover { color: var(--secondary); }
+
+        section {
+            padding: 120px 5% 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 40px;
+            text-align: center;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        #about {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .greeting { color: var(--primary); font-weight: 600; font-size: 1.2rem; margin-bottom: 10px; }
+        
+        .name {
+            font-size: 4rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 10px;
+        }
+
+        .role {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        .description {
+            max-width: 700px;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px -10px var(--primary);
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
+            border-color: rgba(14, 165, 233, 0.3);
+        }
+
+        .card:hover::before { transform: scaleX(1); }
+        .card h3 { font-size: 1.4rem; margin-bottom: 5px; color: var(--text-main); }
+        .card h4 { font-size: 1rem; margin-bottom: 10px; color: var(--text-muted); font-weight: 400; }
+        .card .date { color: var(--primary); font-size: 0.9rem; margin-bottom: 15px; font-weight: 600; display: inline-block; }
+        .card p, .card li { color: var(--text-muted); font-size: 1rem; margin-bottom: 10px; }
+        .card ul { margin-left: 20px; margin-top: 15px; }
+
+        .tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+        .tag {
+            background: rgba(14, 165, 233, 0.1);
+            color: var(--primary);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .skills-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .skill-badge {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .skill-badge:hover {
+            border-color: var(--secondary);
+            color: #fff;
+            background: rgba(139, 92, 246, 0.1);
+            transform: translateY(-3px);
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: var(--text-muted);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="#" class="logo">Ammar<span>.</span></a>
+        <nav>
+            <a href="#about">About</a>
+            <a href="#education">Education</a>
+            <a href="#experience">Experience</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <div class="social-links">
+                <a href="https://github.com/AMMAR217" target="_blank">GitHub</a>
+                <a href="https://www.linkedin.com/in/ammar-yasser-730676344" target="_blank">LinkedIn</a>
+            </div>
+        </nav>
+    </header>
+
+    <section id="about">
+        <p class="greeting">Hi, my name is</p>
+        <h1 class="name">Ammar Ibrahim.</h1>
+        <h2 class="role">Software Developer | Data Analyst</h2>
+        <p class="description">
+            Results-driven Software Developer and aspiring Data Analyst with a strong foundation in C#, SQL Server, and enterprise-level data processing. I specialize in translating complex business rules into automated, highly accurate data pipelines. Currently expanding my expertise in Python and Pandas to leverage large datasets for strategic decision-making and advanced analytics.
+        </p>
+        <a href="#projects" class="btn">Check out my work</a>
+    </section>
+
+    <section id="education">
+        <h2 class="section-title">Education</h2>
+        <div class="card" style="max-width: 800px; margin: 0 auto;">
+            <h3>Bachelor of Computers and Artificial Intelligence</h3>
+            <h4>Cairo University</h4>
+            <p class="date">Operations Research & Decision Support (ORDS)</p>
+            <ul>
+                <li><strong>GPA:</strong> 2.88</li>
+                <li><strong>Graduation Project:</strong> Diabetes Nutrition System</li>
+                <li><strong>Project Grade:</strong> A+</li>
+                <li><strong>Key Focus:</strong> Advanced problem solving, data modeling, and developing robust decision-making systems.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="experience">
+        <h2 class="section-title">Professional Experience</h2>
+        <div class="grid-container">
+            
+            <div class="card">
+                <h3>Application Developer & Financial Data Specialist</h3>
+                <h4>The National Company for Roads Creation, Development, and Management</h4>
+                <p class="date">Present</p>
+                <ul>
+                    <li>Spearheaded the end-to-end automation of financial data pipelines, ensuring 100% accuracy in payroll and bonus calculations for enterprise-scale operations.</li>
+                    <li>Engineered complex relational database queries using SQL Server, Entity Framework Core, and LINQ to aggregate and extract data across multiple entities for analytical reporting.</li>
+                    <li>Validated and reconciled massive datasets of employee records to detect anomalies, ensuring data integrity for top management reports.</li>
+                    <li>Designed high-performance interactive data visualization grids using Telerik UI for WPF, enabling real-time, in-memory data exploration and auditing.</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>Software Trainee</h3>
+                <h4>PixelSoft</h4>
+                <p class="date">June - December</p>
+                <ul>
+                    <li>Completed an intensive 6-month training program focusing on advanced Problem Solving techniques.</li>
+                    <li>Studied relational database architecture and implemented queries using Oracle.</li>
+                    <li>Developed backend database logic and automated scripts using PL/SQL.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <h2 class="section-title">My Tech Stack</h2>
+        <div class="skills-wrapper">
+            <div class="skill-badge">Problem Solving</div>
+            <div class="skill-badge">Python</div>
+            <div class="skill-badge">Pandas (Learning)</div>
+            <div class="skill-badge">SQL Server</div>
+            <div class="skill-badge">Entity Framework Core</div>
+            <div class="skill-badge">Oracle DB & PL/SQL</div>
+            <div class="skill-badge">C# & WPF</div>
+            <div class="skill-badge">Telerik UI</div>
+            <div class="skill-badge">Data Validation & Reporting</div>
+            <div class="skill-badge">Git & GitHub</div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <h2 class="section-title">Featured Projects</h2>
+        <div class="grid-container">
+            
+            <div class="card">
+                <h3>Enterprise Manpower & HR Management System</h3>
+                <p>A comprehensive desktop application built to manage enterprise HR and financial data. The system automates complex payroll calculations, validates massive employee datasets, and provides high-performance, real-time data filtering and analytical reporting capabilities for top management.</p>
+                <div class="tags">
+                    <span class="tag">C#</span>
+                    <span class="tag">WPF</span>
+                    <span class="tag">SQL Server</span>
+                    <span class="tag">EF Core (LINQ)</span>
+                    <span class="tag">Telerik UI</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Diabetes Nutrition System</h3>
+                <p>My graduation project at FCAI. A specialized system designed to support diabetic patients with optimized nutrition plans based on precise data inputs. Awarded an A+ grade.</p>
+                <div class="tags">
+                    <span class="tag">Graduation Project</span>
+                    <span class="tag">Decision Support</span>
+                    <span class="tag">Problem Solving</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Advanced Data Analysis Pipeline</h3>
+                <p>An ongoing project leveraging Python to ingest, clean, and analyze complex datasets. Focused on mastering data frames, high-performance filtering, and generating actionable business insights.</p>
+                <div class="tags">
+                    <span class="tag">Python</span>
+                    <span class="tag">Pandas</span>
+                    <span class="tag">Data Analysis</span>
+                    <span class="tag">In Progress</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <p>Built by Ammar Ibrahim © 2026</p>
+    </footer>
+
+</body>
+</html>
